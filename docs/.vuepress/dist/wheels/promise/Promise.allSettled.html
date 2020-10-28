@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>手写Promise.allSettled | CO2-blog</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" href="/blog/favicon.ico">
+    <meta name="description" content="Just playing around">
+    <link rel="preload" href="/blog/assets/css/0.styles.19f3a7f1.css" as="style"><link rel="preload" href="/blog/assets/js/app.6322e7d5.js" as="script"><link rel="preload" href="/blog/assets/js/2.9886cf03.js" as="script"><link rel="preload" href="/blog/assets/js/59.dd61f0dd.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.534e159d.js"><link rel="prefetch" href="/blog/assets/js/11.7a0ebbcf.js"><link rel="prefetch" href="/blog/assets/js/12.7de6e769.js"><link rel="prefetch" href="/blog/assets/js/13.8f05c5ca.js"><link rel="prefetch" href="/blog/assets/js/14.45900f27.js"><link rel="prefetch" href="/blog/assets/js/15.04b191f8.js"><link rel="prefetch" href="/blog/assets/js/16.60e41aed.js"><link rel="prefetch" href="/blog/assets/js/17.fc07be58.js"><link rel="prefetch" href="/blog/assets/js/18.5b8424a1.js"><link rel="prefetch" href="/blog/assets/js/19.068c30ae.js"><link rel="prefetch" href="/blog/assets/js/20.5156aa93.js"><link rel="prefetch" href="/blog/assets/js/21.5de575d1.js"><link rel="prefetch" href="/blog/assets/js/22.7b941c9f.js"><link rel="prefetch" href="/blog/assets/js/23.4c666a88.js"><link rel="prefetch" href="/blog/assets/js/24.81a67a54.js"><link rel="prefetch" href="/blog/assets/js/25.7858cb06.js"><link rel="prefetch" href="/blog/assets/js/26.5ba7dc05.js"><link rel="prefetch" href="/blog/assets/js/27.641bfad0.js"><link rel="prefetch" href="/blog/assets/js/28.eefbc9b6.js"><link rel="prefetch" href="/blog/assets/js/29.e1b7eca0.js"><link rel="prefetch" href="/blog/assets/js/3.d2d5dd65.js"><link rel="prefetch" href="/blog/assets/js/30.6d6aef07.js"><link rel="prefetch" href="/blog/assets/js/31.2a3355c0.js"><link rel="prefetch" href="/blog/assets/js/32.ea5f5da5.js"><link rel="prefetch" href="/blog/assets/js/33.e0f62aca.js"><link rel="prefetch" href="/blog/assets/js/34.6baa9504.js"><link rel="prefetch" href="/blog/assets/js/35.b1126bc8.js"><link rel="prefetch" href="/blog/assets/js/36.eaf6439e.js"><link rel="prefetch" href="/blog/assets/js/37.a908ac30.js"><link rel="prefetch" href="/blog/assets/js/38.1a8bcac4.js"><link rel="prefetch" href="/blog/assets/js/39.66aa143b.js"><link rel="prefetch" href="/blog/assets/js/4.66219fcb.js"><link rel="prefetch" href="/blog/assets/js/40.ffa2bdae.js"><link rel="prefetch" href="/blog/assets/js/41.d2cc5b2a.js"><link rel="prefetch" href="/blog/assets/js/42.ec93816d.js"><link rel="prefetch" href="/blog/assets/js/43.d7fa1a90.js"><link rel="prefetch" href="/blog/assets/js/44.e272b57b.js"><link rel="prefetch" href="/blog/assets/js/45.70ad1b7e.js"><link rel="prefetch" href="/blog/assets/js/46.a7638bc1.js"><link rel="prefetch" href="/blog/assets/js/47.99550579.js"><link rel="prefetch" href="/blog/assets/js/48.51c1bdb7.js"><link rel="prefetch" href="/blog/assets/js/49.5d4c5a76.js"><link rel="prefetch" href="/blog/assets/js/5.fdf36b4f.js"><link rel="prefetch" href="/blog/assets/js/50.273edde6.js"><link rel="prefetch" href="/blog/assets/js/51.0f1dc044.js"><link rel="prefetch" href="/blog/assets/js/52.a9ec54b2.js"><link rel="prefetch" href="/blog/assets/js/53.5f174a6e.js"><link rel="prefetch" href="/blog/assets/js/54.c94406a1.js"><link rel="prefetch" href="/blog/assets/js/55.36b6e539.js"><link rel="prefetch" href="/blog/assets/js/56.3570dd44.js"><link rel="prefetch" href="/blog/assets/js/57.8fedf194.js"><link rel="prefetch" href="/blog/assets/js/58.e6fc370a.js"><link rel="prefetch" href="/blog/assets/js/6.73fe1d66.js"><link rel="prefetch" href="/blog/assets/js/60.57735b36.js"><link rel="prefetch" href="/blog/assets/js/61.e3267ef7.js"><link rel="prefetch" href="/blog/assets/js/7.8f25fbec.js"><link rel="prefetch" href="/blog/assets/js/8.682d7c8a.js"><link rel="prefetch" href="/blog/assets/js/9.ce4aea62.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.19f3a7f1.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">CO2-blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/algorithm/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/blog/adancedJs/" class="nav-link">
+  JavaScript
+</a></div><div class="nav-item"><a href="/blog/wheels/" class="nav-link router-link-active">
+  手写系列
+</a></div><div class="nav-item"><a href="/blog/cssSecret/" class="nav-link">
+  CSS/图形学
+</a></div><div class="nav-item"><a href="/blog/frameworks/" class="nav-link">
+  框架
+</a></div><div class="nav-item"><a href="/blog/engineering/" class="nav-link">
+  工程化
+</a></div><div class="nav-item"><a href="/blog/executionEnvironment/" class="nav-link">
+  执行环境
+</a></div><div class="nav-item"><a href="/blog/soundcode/" class="nav-link">
+  源码分析
+</a></div><div class="nav-item"><a href="/blog/business/" class="nav-link">
+  业务场景
+</a></div><div class="nav-item"><a href="/blog/bookNotes/" class="nav-link">
+  读书
+</a></div><div class="nav-item"><a href="https://github.com/CO2-2020" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/algorithm/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/blog/adancedJs/" class="nav-link">
+  JavaScript
+</a></div><div class="nav-item"><a href="/blog/wheels/" class="nav-link router-link-active">
+  手写系列
+</a></div><div class="nav-item"><a href="/blog/cssSecret/" class="nav-link">
+  CSS/图形学
+</a></div><div class="nav-item"><a href="/blog/frameworks/" class="nav-link">
+  框架
+</a></div><div class="nav-item"><a href="/blog/engineering/" class="nav-link">
+  工程化
+</a></div><div class="nav-item"><a href="/blog/executionEnvironment/" class="nav-link">
+  执行环境
+</a></div><div class="nav-item"><a href="/blog/soundcode/" class="nav-link">
+  源码分析
+</a></div><div class="nav-item"><a href="/blog/business/" class="nav-link">
+  业务场景
+</a></div><div class="nav-item"><a href="/blog/bookNotes/" class="nav-link">
+  读书
+</a></div><div class="nav-item"><a href="https://github.com/CO2-2020" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/blog/wheels/promise/Promise.allSettled.html" class="active sidebar-link">手写Promise.allSettled</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/wheels/promise/Promise.allSettled.html#原理" class="sidebar-link">原理</a></li><li class="sidebar-sub-header"><a href="/blog/wheels/promise/Promise.allSettled.html#实现" class="sidebar-link">实现</a></li></ul></li><li><a href="/blog/wheels/promise/Promise.html" class="sidebar-link">Promise实现</a></li><li><a href="/blog/wheels/base/base.html" class="sidebar-link">基础手写</a></li><li><a href="/blog/wheels/base/currying.html" class="sidebar-link">柯里化与反柯里化</a></li><li><a href="/blog/wheels/base/debounce_throttle.html" class="sidebar-link">防抖与节流对比</a></li><li><a href="/blog/wheels/base/evnetemitter.html" class="sidebar-link">手写发布订阅</a></li><li><a href="/blog/wheels/base/deepClone.html" class="sidebar-link">手写深拷贝</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="手写promise-allsettled"><a href="#手写promise-allsettled" class="header-anchor">#</a> 手写Promise.allSettled</h1> <h2 id="原理"><a href="#原理" class="header-anchor">#</a> 原理</h2> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token keyword">const</span> resolved <span class="token operator">=</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> rejected <span class="token operator">=</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> allSettledPromise <span class="token operator">=</span> Promise<span class="token punctuation">.</span><span class="token function">allSettled</span><span class="token punctuation">(</span><span class="token punctuation">[</span>resolved<span class="token punctuation">,</span> rejected<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+allSettledPromise<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">results</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// [</span>
+<span class="token comment">//    { status: 'fulfilled', value: 42 },</span>
+<span class="token comment">//    { status: 'rejected', reason: -1 }</span>
+<span class="token comment">// ]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><ol><li><code>Promise.allSettled()</code> 方法接受一组 <code>Promise</code> 实例作为参数，返回一个新的Promise实例。</li> <li>只有等到所有这些参数实例都返回结果，不管是 <code>fulfilled</code> 还是 <code>rejected</code> ，包装实例才会结束。</li> <li>返回的新 <code>Promise</code> 实例，一旦结束，状态总是 <code>fulfilled</code> ，不会变成 <code>rejected</code> 。</li> <li>新的 <code>Promise</code> 实例给监听函数传递一个数组 <code>results</code> 。该数组的每个成员都是一个对象，对应传入 <code>Promise.allSettled</code>的Promise实例。每个对象都有status属性，对应着 <code>fulfilled</code> 和 <code>rejected</code> 。 <code>fulfilled</code> 时，对象有 <code>value</code> 属性, <code>rejected</code> 时有 <code>reason</code> 属性，对应两种状态的返回值。</li> <li>有时候我们不关心异步操作的结果，只关心这些操作有没有结束时，这个方法会比较有用。</li></ol> <h2 id="实现"><a href="#实现" class="header-anchor">#</a> 实现</h2> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token keyword">const</span> <span class="token function-variable function">formatSettledResult</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">success<span class="token punctuation">,</span> value</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+    success <span class="token operator">?</span> <span class="token punctuation">{</span> status<span class="token operator">:</span> <span class="token string">&quot;fulfilled&quot;</span><span class="token punctuation">,</span> value <span class="token punctuation">}</span>
+        <span class="token operator">:</span> <span class="token punctuation">{</span> status<span class="token operator">:</span> <span class="token string">&quot;rejected&quot;</span><span class="token punctuation">,</span> reason<span class="token operator">:</span> value <span class="token punctuation">}</span>
+
+Promise<span class="token punctuation">.</span><span class="token function-variable function">all_settled</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">iterators</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> promises <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>iterators<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> num <span class="token operator">=</span> promises<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+    <span class="token keyword">const</span> resultList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> resultNum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token parameter">resolve</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        promises<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">promise<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>promise<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                    resultList<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">formatSettledResult</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">++</span>resultNum <span class="token operator">===</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token function">resolve</span><span class="token punctuation">(</span>resultList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">error</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                    resultList<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">formatSettledResult</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">,</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">++</span>resultNum <span class="token operator">===</span> num<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                        <span class="token function">resolve</span><span class="token punctuation">(</span>resultList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//demo</span>
+<span class="token keyword">const</span> resolved <span class="token operator">=</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> rejected <span class="token operator">=</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Promise<span class="token punctuation">.</span><span class="token function">all_settled</span><span class="token punctuation">(</span><span class="token punctuation">[</span>resolved<span class="token punctuation">,</span>rejected<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">results</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br></div></div><p></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/blog/wheels/promise/Promise.html">
+        Promise实现
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.6322e7d5.js" defer></script><script src="/blog/assets/js/2.9886cf03.js" defer></script><script src="/blog/assets/js/59.dd61f0dd.js" defer></script>
+  </body>
+</html>

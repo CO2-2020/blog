@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vue API原理解析 | CO2-blog</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" href="/blog/favicon.ico">
+    <meta name="description" content="Just playing around">
+    <link rel="preload" href="/blog/assets/css/0.styles.19f3a7f1.css" as="style"><link rel="preload" href="/blog/assets/js/app.6322e7d5.js" as="script"><link rel="preload" href="/blog/assets/js/2.9886cf03.js" as="script"><link rel="preload" href="/blog/assets/js/50.273edde6.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.534e159d.js"><link rel="prefetch" href="/blog/assets/js/11.7a0ebbcf.js"><link rel="prefetch" href="/blog/assets/js/12.7de6e769.js"><link rel="prefetch" href="/blog/assets/js/13.8f05c5ca.js"><link rel="prefetch" href="/blog/assets/js/14.45900f27.js"><link rel="prefetch" href="/blog/assets/js/15.04b191f8.js"><link rel="prefetch" href="/blog/assets/js/16.60e41aed.js"><link rel="prefetch" href="/blog/assets/js/17.fc07be58.js"><link rel="prefetch" href="/blog/assets/js/18.5b8424a1.js"><link rel="prefetch" href="/blog/assets/js/19.068c30ae.js"><link rel="prefetch" href="/blog/assets/js/20.5156aa93.js"><link rel="prefetch" href="/blog/assets/js/21.5de575d1.js"><link rel="prefetch" href="/blog/assets/js/22.7b941c9f.js"><link rel="prefetch" href="/blog/assets/js/23.4c666a88.js"><link rel="prefetch" href="/blog/assets/js/24.81a67a54.js"><link rel="prefetch" href="/blog/assets/js/25.7858cb06.js"><link rel="prefetch" href="/blog/assets/js/26.5ba7dc05.js"><link rel="prefetch" href="/blog/assets/js/27.641bfad0.js"><link rel="prefetch" href="/blog/assets/js/28.eefbc9b6.js"><link rel="prefetch" href="/blog/assets/js/29.e1b7eca0.js"><link rel="prefetch" href="/blog/assets/js/3.d2d5dd65.js"><link rel="prefetch" href="/blog/assets/js/30.6d6aef07.js"><link rel="prefetch" href="/blog/assets/js/31.2a3355c0.js"><link rel="prefetch" href="/blog/assets/js/32.ea5f5da5.js"><link rel="prefetch" href="/blog/assets/js/33.e0f62aca.js"><link rel="prefetch" href="/blog/assets/js/34.6baa9504.js"><link rel="prefetch" href="/blog/assets/js/35.b1126bc8.js"><link rel="prefetch" href="/blog/assets/js/36.eaf6439e.js"><link rel="prefetch" href="/blog/assets/js/37.a908ac30.js"><link rel="prefetch" href="/blog/assets/js/38.1a8bcac4.js"><link rel="prefetch" href="/blog/assets/js/39.66aa143b.js"><link rel="prefetch" href="/blog/assets/js/4.66219fcb.js"><link rel="prefetch" href="/blog/assets/js/40.ffa2bdae.js"><link rel="prefetch" href="/blog/assets/js/41.d2cc5b2a.js"><link rel="prefetch" href="/blog/assets/js/42.ec93816d.js"><link rel="prefetch" href="/blog/assets/js/43.d7fa1a90.js"><link rel="prefetch" href="/blog/assets/js/44.e272b57b.js"><link rel="prefetch" href="/blog/assets/js/45.70ad1b7e.js"><link rel="prefetch" href="/blog/assets/js/46.a7638bc1.js"><link rel="prefetch" href="/blog/assets/js/47.99550579.js"><link rel="prefetch" href="/blog/assets/js/48.51c1bdb7.js"><link rel="prefetch" href="/blog/assets/js/49.5d4c5a76.js"><link rel="prefetch" href="/blog/assets/js/5.fdf36b4f.js"><link rel="prefetch" href="/blog/assets/js/51.0f1dc044.js"><link rel="prefetch" href="/blog/assets/js/52.a9ec54b2.js"><link rel="prefetch" href="/blog/assets/js/53.5f174a6e.js"><link rel="prefetch" href="/blog/assets/js/54.c94406a1.js"><link rel="prefetch" href="/blog/assets/js/55.36b6e539.js"><link rel="prefetch" href="/blog/assets/js/56.3570dd44.js"><link rel="prefetch" href="/blog/assets/js/57.8fedf194.js"><link rel="prefetch" href="/blog/assets/js/58.e6fc370a.js"><link rel="prefetch" href="/blog/assets/js/59.dd61f0dd.js"><link rel="prefetch" href="/blog/assets/js/6.73fe1d66.js"><link rel="prefetch" href="/blog/assets/js/60.57735b36.js"><link rel="prefetch" href="/blog/assets/js/61.e3267ef7.js"><link rel="prefetch" href="/blog/assets/js/7.8f25fbec.js"><link rel="prefetch" href="/blog/assets/js/8.682d7c8a.js"><link rel="prefetch" href="/blog/assets/js/9.ce4aea62.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.19f3a7f1.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">CO2-blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/algorithm/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/blog/adancedJs/" class="nav-link">
+  JavaScript
+</a></div><div class="nav-item"><a href="/blog/wheels/" class="nav-link">
+  手写系列
+</a></div><div class="nav-item"><a href="/blog/cssSecret/" class="nav-link">
+  CSS/图形学
+</a></div><div class="nav-item"><a href="/blog/frameworks/" class="nav-link router-link-active">
+  框架
+</a></div><div class="nav-item"><a href="/blog/engineering/" class="nav-link">
+  工程化
+</a></div><div class="nav-item"><a href="/blog/executionEnvironment/" class="nav-link">
+  执行环境
+</a></div><div class="nav-item"><a href="/blog/soundcode/" class="nav-link">
+  源码分析
+</a></div><div class="nav-item"><a href="/blog/business/" class="nav-link">
+  业务场景
+</a></div><div class="nav-item"><a href="/blog/bookNotes/" class="nav-link">
+  读书
+</a></div><div class="nav-item"><a href="https://github.com/CO2-2020" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/algorithm/" class="nav-link">
+  算法
+</a></div><div class="nav-item"><a href="/blog/adancedJs/" class="nav-link">
+  JavaScript
+</a></div><div class="nav-item"><a href="/blog/wheels/" class="nav-link">
+  手写系列
+</a></div><div class="nav-item"><a href="/blog/cssSecret/" class="nav-link">
+  CSS/图形学
+</a></div><div class="nav-item"><a href="/blog/frameworks/" class="nav-link router-link-active">
+  框架
+</a></div><div class="nav-item"><a href="/blog/engineering/" class="nav-link">
+  工程化
+</a></div><div class="nav-item"><a href="/blog/executionEnvironment/" class="nav-link">
+  执行环境
+</a></div><div class="nav-item"><a href="/blog/soundcode/" class="nav-link">
+  源码分析
+</a></div><div class="nav-item"><a href="/blog/business/" class="nav-link">
+  业务场景
+</a></div><div class="nav-item"><a href="/blog/bookNotes/" class="nav-link">
+  读书
+</a></div><div class="nav-item"><a href="https://github.com/CO2-2020" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><a href="/blog/frameworks/Vue/VuePrinciple" class="sidebar-heading clickable open active"><span>vue</span> <span class="arrow down"></span></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/blog/frameworks/Vue/VuePrinciple.html" class="active sidebar-link">Vue API原理解析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/frameworks/Vue/VuePrinciple.html#_1-说一下-vm-set-原理" class="sidebar-link">1. 说一下 vm.$set 原理</a></li></ul></li><li><a href="/blog/frameworks/Vue/VueCombat.html" class="sidebar-link">Vue 实战问题解析</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vue-api原理解析"><a href="#vue-api原理解析" class="header-anchor">#</a> Vue API原理解析</h1> <h2 id="_1-说一下-vm-set-原理"><a href="#_1-说一下-vm-set-原理" class="header-anchor">#</a> 1. 说一下 vm.$set 原理</h2> <h3 id="源码"><a href="#源码" class="header-anchor">#</a> 源码</h3> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code> <span class="token keyword">function</span> <span class="token keyword">set</span><span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> key<span class="token punctuation">,</span> val</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token comment">//1.类型判断</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isUndef</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token function">isPrimitive</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">warn</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">&quot;Cannot set reactive property on undefined, null, or primitive value: &quot;</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//2.数组处理</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isValidArrayIndex</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">//如果不设置length，splice时，超过原本数量的index则不会添加空白项</span>
+      target<span class="token punctuation">.</span>length <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>target<span class="token punctuation">.</span>length<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      target<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> val
+    <span class="token punctuation">}</span>
+    <span class="token comment">//3.对象，且key不是原型上的属性处理</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token keyword">in</span> target <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token punctuation">(</span>key <span class="token keyword">in</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      target<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> val<span class="token punctuation">;</span>
+      <span class="token keyword">return</span> val
+    <span class="token punctuation">}</span>
+    <span class="token comment">//通过判断target对象是否存在__ob__属性来判断target是否是响应式数据</span>
+    <span class="token keyword">var</span> ob <span class="token operator">=</span> <span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">.</span>__ob__<span class="token punctuation">;</span>
+   
+    <span class="token comment">//4. 对象不能是 Vue 实例，或者 Vue 实例的根数据对象</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>target<span class="token punctuation">.</span>_isVue <span class="token operator">||</span> <span class="token punctuation">(</span>ob <span class="token operator">&amp;&amp;</span> ob<span class="token punctuation">.</span>vmCount<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">warn</span><span class="token punctuation">(</span>
+        <span class="token string">'Avoid adding reactive properties to a Vue instance or its root $data '</span> <span class="token operator">+</span>
+        <span class="token string">'at runtime - declare it upfront in the data option.'</span>
+      <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> val
+    <span class="token punctuation">}</span>
+    <span class="token comment">//5.target是非响应式数据时</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ob<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      target<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> val<span class="token punctuation">;</span>
+      <span class="token keyword">return</span> val
+    <span class="token punctuation">}</span>
+   <span class="token comment">//6.target对象是响应式数据时</span>
+    <span class="token function">defineReactive$$1</span><span class="token punctuation">(</span>ob<span class="token punctuation">.</span>value<span class="token punctuation">,</span> key<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//定义响应式对象</span>
+    ob<span class="token punctuation">.</span>dep<span class="token punctuation">.</span><span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//watcher执行</span>
+    <span class="token keyword">return</span> val
+  <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br></div></div><p>从源码可以看出set主要逻辑如下：</p> <ol><li>类型判断</li> <li>target为数组：调用splice方法</li> <li>target为对象，且key不是原型上的属性处理：直接修改</li> <li>target不能是 Vue 实例，或者 Vue 实例的根数据对象，否则报错</li> <li>target是非响应式数据时，我们就按照普通对象添加属性的方式来处理</li> <li>target为响应数据，且<strong>key为新增属性</strong>，我们key设置为响应式，并手动触发其属性值的更新</li></ol> <h3 id="总结："><a href="#总结：" class="header-anchor">#</a> 总结：</h3> <p>vm.$set(target、key、value)当target为数组时，直接调用数组方法splice实现；当target为对象，且key是对象上非原型属性的属性时，直接修改；当target不是响应对象时，直接修改；target为响应数据且key为新增属性时，将key也设置成响应式，并手动触发更新</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/blog/frameworks/Vue/VueCombat.html">
+        Vue 实战问题解析
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.6322e7d5.js" defer></script><script src="/blog/assets/js/2.9886cf03.js" defer></script><script src="/blog/assets/js/50.273edde6.js" defer></script>
+  </body>
+</html>
