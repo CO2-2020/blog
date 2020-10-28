@@ -1,6 +1,6 @@
 # webpack 实战问题解析
 
-## 1. webpack对于被多次引用的模块是如何处理的？会重复加载嘛？
+## 1. 多次引用的模块是如何处理的？会重复加载嘛？
 不会，这个问题主要是涉及webpack的**模块化机制**。
 首先看个案例，a.js
 ```javascript
@@ -70,7 +70,7 @@ _addModule(module, callback) {
 }
 ```
 ### 总结：对于多次引用的模块是不会重复加载的。
-## 2. webpack是怎么处理模块循环引用的情况的？
+## 2. 模块循环引用问题如何处理？
 理论上循环引用会导致栈溢出，但并非所有循环引用都会导致栈溢出。
 ### 案例一（不会栈溢出）：
 脚本文件`a.js`代码如下。
@@ -148,9 +148,9 @@ console.log('在 main.js 之中, a.done=%j, b.done=%j', a.done, b.done);
 #### __webpack_require__ 做了以下几件事：
 
 1. 根据 moduleId 查看 installedModules 中是否存在相应的 module ，如果存在就返回对应的 module.exports
-1. 如果 module 不存在，就创建一个新的 module 对象，并且使 installedModules[moduleId] 指向新建的 module 对象
-1. 根据 moduleId 从 modules 对象中找到对应的模块初始化函数并执行，依次传入 module，module.exports，__webpack_require__。可以看到，__webpack_require__ 被当作参数传入，使得所有模块内部都可以通过调用该函数来引入其他模块
-1. 最后一步，返回 module.exports
+2. 如果 module 不存在，就创建一个新的 module 对象，并且使 installedModules[moduleId] 指向新建的 module 对象
+3. 根据 moduleId 从 modules 对象中找到对应的模块初始化函数并执行，依次传入 module，module.exports，__webpack_require__。可以看到，__webpack_require__ 被当作参数传入，使得所有模块内部都可以通过调用该函数来引入其他模块
+4. 最后一步，返回 module.exports
 
 
 
