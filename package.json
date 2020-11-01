@@ -11,5 +11,19 @@
     "master": "bash master.sh"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "commitizen": "^4.2.2",
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "husky": "^4.3.0"
+  }
 }

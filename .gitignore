@@ -1,3 +1,4 @@
 /node_modules/
 deploy-gh.sh
 master.sh
+yarn.lock
